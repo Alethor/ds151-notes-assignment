@@ -6,6 +6,7 @@ import HomeScreen from './src/screens/HomeScreen';
 
 import NewNoteScreen from './src/screens/NewNoteScreen';
 import { NotesProvider } from './src/context/NotesContext';
+import UpdateNoteScreen from './src/screens/UpdateNoteScreen';
 
 
 
@@ -18,6 +19,7 @@ function App() {
             <Stack.Navigator>
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="NewNote" component={NewNoteScreen} />
+              <Stack.Screen name="UpdateNote" component={UpdateNoteScreen} />
             </Stack.Navigator>
           </NavigationContainer>
         </NotesProvider>

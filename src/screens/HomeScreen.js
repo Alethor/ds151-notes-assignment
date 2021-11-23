@@ -6,7 +6,6 @@ import { Feather } from '@expo/vector-icons';
 
 const HomeScreen = ({navigation}) => {
 	const context = useContext(NotesContext);
-	var lista;
 
 	return(
         <View>
@@ -23,13 +22,13 @@ const HomeScreen = ({navigation}) => {
 						renderItem={({item}) => {
 							return(
 								<View style={styles.containerView}>
-									<TouchableOpacity style={styles.container}>
+									<TouchableOpacity style={styles.container} onPress={() => {navigation.navigate("UpdateNote", {title: item.title, content: item.content})}}>
                     <Text style={styles.textLabel}>Título:</Text>
 										<Text style={styles.textContent}>{item.title}</Text>
                     <Text style={styles.textLabel}>Conteúdo:</Text>
 										<Text style={styles.textContent}>{item.content}</Text>	
 									</TouchableOpacity>
-                  <TouchableHighlight underlayColor="red" style={styles.deleteButton} onPress={() => {}}>
+                  <TouchableHighlight underlayColor="red" style={styles.deleteButton} onPress={() => {context.dispatch({type:"delete", payload:{title: item.title, content: item.content}})}}>
                     <View style={styles.viewHighlight}>
                       <Feather name="trash-2" size={35} color="red" />
                     </View>
