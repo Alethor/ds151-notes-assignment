@@ -5,7 +5,7 @@ const NotesContext = createContext();
 const notesReducer = (state, action) => {
     switch(action.type){
         case "new":
-            return([...state, {content:action.content, title:action.title}]);
+            return([...state, {content:action.payload.content, title:action.payload.title}]);
         case "update":
             return;
         case "delete": 

@@ -1,22 +1,23 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {Text, StyleSheet, ScrollView, TouchableHighlight, View, TextInput} from 'react-native';
 import { contextType } from 'react-native/Libraries/Image/ImageBackground';
 import { NotesContext } from '../context/NotesContext';
 
 
 const NewNoteScreen = ({navigation}) => {
-    var title;
-    var content;
     const notesContext = useContext(NotesContext);
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
 
     function saveTitle(t){
-        title = t;
+        setTitle(t);
     }
     function saveContent(t){
-        content = t;
+        setContent(t);
     }
     function montaPayload(){
-        notesContext.dispatch({type:"new", title:{title}, content:{content}});
+        notesContext.dispatch({type:"new", payload:{title:title, content:content}});
+        navigation.navigate("Home");
     }
 
     return(
@@ -38,7 +39,9 @@ const NewNoteScreen = ({navigation}) => {
             </TextInput>
             <View>
                 <TouchableHighlight underlayColor="#308ff0" style={styles.buttons} onPress={() => {montaPayload()}}>
+                  <View style={styles.viewHighlight}>
                     <Text styles={styles.text}>Adicionar Nova Nota</Text>
+                  </View>
                 </TouchableHighlight>
             </View>
         </View>
@@ -89,6 +92,9 @@ const styles = StyleSheet.create({
         padding: 30,
         marginLeft: 20,
         textAlign: 'center',
+      },
+      viewHighlight:{
+        alignItems: "center",
       },
 });
 
