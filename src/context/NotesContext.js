@@ -2,25 +2,30 @@ import React, {useReducer, createContext, useState} from 'react';
 
 const NotesContext = createContext();
 
-const notesReducer = (state, action) => {
+
+const NotesProvider = ({children}) => {
+  const[idState, setIdState] = useState(2);
+
+  const notesReducer = (state, action) => {
 
     switch(action.type){
         case "new":
-            return([...state, {content:action.payload.content, title:action.payload.title}]);
+            setIdState(idState + 1);
+            return([...state, {id:idState, content:action.payload.content, title:action.payload.title}]);
         case "update":
-            let index = state.findIndex(item => (item.title == action.payload.title && item.content == action.payload.content));
+            let index = state.findIndex(item => (item.id == action.payload.id));
             var newState = [...state];
             newState[index] = action.payload;
-            console.log(newState[index]);
+            console.log(state.lenght);
             return([...newState]);
         case "delete": 
-          return([...state.filter((item) => (item.title != (action.payload.title)) && item.payload != (action.payload.content))]);
+          setIdState(idState -1);
+          return([...state.filter((item) => (item.id != action.payload.id))]);
 
     }
 }
-const NotesProvider = ({children}) => {
 
-  const [state, dispatch] = useReducer(notesReducer, [{title: "nota 1", content: "conteudo 1"}, {title: "nota 2", content: "conteudo 2"} ])
+  const [state, dispatch] = useReducer(notesReducer, [{id: 1,title: "nota 1", content: "conteudo 1"}, {id: 2,title: "nota 2", content: "conteudo 2"} ])
     return(
         <NotesContext.Provider value={{state, dispatch}}>
             {children}

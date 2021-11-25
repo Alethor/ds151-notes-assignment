@@ -15,7 +15,7 @@ const UpdateNoteScreen = ({navigation, route}) => {
         setContent(t);
     }
     function montaPayload(){
-        notesContext.dispatch({type:"update", payload:{title:title, content:content}});
+        notesContext.dispatch({type:"update", payload:{id: route.params.id, title:title, content:content}});
         navigation.navigate("Home");
     }
 

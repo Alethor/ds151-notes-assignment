@@ -22,13 +22,13 @@ const HomeScreen = ({navigation}) => {
 						renderItem={({item}) => {
 							return(
 								<View style={styles.containerView}>
-									<TouchableOpacity style={styles.container} onPress={() => {navigation.navigate("UpdateNote", {title: item.title, content: item.content})}}>
+									<TouchableOpacity style={styles.container} onPress={() => {navigation.navigate("UpdateNote", {id: item.id, title: item.title, content: item.content})}}>
                     <Text style={styles.textLabel}>Título:</Text>
 										<Text style={styles.textContent}>{item.title}</Text>
                     <Text style={styles.textLabel}>Conteúdo:</Text>
 										<Text style={styles.textContent}>{item.content}</Text>	
 									</TouchableOpacity>
-                  <TouchableHighlight underlayColor="red" style={styles.deleteButton} onPress={() => {context.dispatch({type:"delete", payload:{title: item.title, content: item.content}})}}>
+                  <TouchableHighlight underlayColor="red" style={styles.deleteButton} onPress={() => {context.dispatch({type:"delete", payload:{id: item.id}})}}>
                     <View style={styles.viewHighlight}>
                       <Feather name="trash-2" size={35} color="red" />
                     </View>
